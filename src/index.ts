@@ -29,6 +29,24 @@ const sendCommand = (direction: cardinalPoint, steps: number, rover: rover) => {
 };
 
 /**
+ * Get command from user input
+ */
+const userInput = async (txt: string, rover: rover) => {
+  const input = txt.split(" ");
+  const command = input[0] ?? "";
+  if (command === "move") {
+    const direction = input[1] ?? "";
+    const steps = input[2] ? Number(input[2]) : 0;
+    const confirmation = await sendCommand(
+      direction as cardinalPoint,
+      steps,
+      rover
+    );
+    if (confirmation) console.log("message received");
+  }
+};
+
+/**
  * Command Line Interface
  */
 const cli = () => {
@@ -46,19 +64,7 @@ const cli = () => {
   rl.prompt();
 
   rl.on("line", async (input: string) => {
-    const temp = input.split(" ");
-    const command = temp[0] ?? "";
-    if (command === "move") {
-      const direction = temp[1] ?? "";
-      const steps = temp[2] ? Number(temp[2]) : 0;
-      const confirmation = await sendCommand(
-        direction as cardinalPoint,
-        steps,
-        rover
-      );
-      if (confirmation) console.log("message received");
-    }
-
+    await userInput(input, rover)
     rl.prompt();
   });
 };
