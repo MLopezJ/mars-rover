@@ -1,18 +1,19 @@
 import type { rover } from ".";
 
 /**
- * set the move instruction
+ * Set the move instruction to the rover
+ * Because of the distance, message delays the number of steps in seconds
  */
 export const move = (
   newDirection: {
       x: number, 
       y: number
     },
-    rover: rover
-  ): void => {
-    rover.x += newDirection.x;
-    rover.y += newDirection.y;
-   
+    seconds: number
+  ): Promise<rover> => {
+    return new Promise((resolve, reject) => {
+      setTimeout(resolve,
+        seconds * 1000
+      );
+    });   
   };
-
-  // time here
