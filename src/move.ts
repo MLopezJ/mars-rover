@@ -9,14 +9,8 @@ export const move = (
       y: number
     },
     rover: rover
-  ): {
-    x: number;
-    y: number;
-  } => {
-    const newPosition = structuredClone(rover);
-    newPosition.x += newDirection.x;
-    newPosition.y += newDirection.y;
-    console.log(`\nprevius position`, rover);
-    console.log(`actual position`, newPosition);
-    return newPosition;
+  ): void => {
+    rover.x += newDirection.x;
+    rover.y += newDirection.y;
+   
   };

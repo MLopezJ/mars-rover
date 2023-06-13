@@ -15,7 +15,7 @@ const roverEmitter = new EventEmitter();
 roverEmitter.on("move", ({ newDirection, rover }) => move(newDirection, rover));
 
 /**
- * Send command to rover
+ * Send command to rover.
  * Because of the distance, message delays the number of steps in seconds
  */
 const sendMoveCommand = (direction: cardinalPoint, steps: number, rover: rover) => {
@@ -65,6 +65,7 @@ const cli = () => {
 
   rl.on("line", async (input: string) => {
     await userInput(input, rover);
+    console.log(rover)
     rl.prompt();
   });
 };
