@@ -1,6 +1,6 @@
 import type {cardinalPoint} from ".";
 
-export const stepsToCardinalPoints = (
+export const cardinalPointToCoordinates = (
     cardinalPoint: cardinalPoint,
     steps: number
   ): {

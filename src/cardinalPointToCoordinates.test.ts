@@ -1,7 +1,7 @@
-import { stepsToCardinalPoints } from "./stepsToCardinalPoints";
+import { cardinalPointToCoordinates } from "./cardinalPointToCoordinates";
 import type {cardinalPoint} from ".";
 
-describe("StepsToCardinalPoints", () => {
+describe("cardinalPointToCoordinates", () => {
   it.each([
     ["N", 50, { x: 0, y: 50 }],
     ["S", 10, { x: 0, y: -10 }],
@@ -11,7 +11,7 @@ describe("StepsToCardinalPoints", () => {
     "Should convert the steps in cardinal points",
     (cardinalPoint, steps, expected) => {
       expect(
-        stepsToCardinalPoints(cardinalPoint as cardinalPoint, steps)
+        cardinalPointToCoordinates(cardinalPoint as cardinalPoint, steps)
       ).toMatchObject(expected);
     }
   );

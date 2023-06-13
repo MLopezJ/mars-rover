@@ -1,7 +1,7 @@
 import * as readline from "readline";
 import EventEmitter from "events";
 import { move } from "./move";
-import { stepsToCardinalPoints } from "./stepsToCardinalPoints";
+import { cardinalPointToCoordinates } from "./cardinalPointToCoordinates";
 
 export type cardinalPoint = "N" | "S" | "E" | "W";
 export type rover = {
@@ -19,8 +19,10 @@ roverEmitter.on("move", ({ newDirection, rover }) => move(newDirection, rover));
  * Because of the distance, message delays the number of steps in seconds
  */
 const sendMoveCommand = (direction: cardinalPoint, steps: number, rover: rover) => {
+
+  const newDirection = cardinalPointToCoordinates(direction, steps);
   return new Promise((resolve, reject) => {
-    const newDirection = stepsToCardinalPoints(direction, steps);
+    
     setTimeout(
       () => resolve(roverEmitter.emit("move", { newDirection, rover })),
       steps * 1000

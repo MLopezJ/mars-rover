@@ -19,12 +19,14 @@ example: move('N',4)
 ## Implementation rules
 1. All commands take 100ms x number of steps
 2. Must use Node.js EventEmitter to signal new position
+3. 'getPosition' method is not allowed to be implemented
+4. `move` method should not return the 
 
 ## Installation
 ```
 npm install
 ```
-## test
+## Test
 ```
 npm test
 ```
