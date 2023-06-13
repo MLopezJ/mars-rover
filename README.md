@@ -23,5 +23,5 @@ example: move('N',4)
 
 ## Execution
 ```
-npx tsx index
+npx tsx src/index
 ```
