@@ -10,14 +10,6 @@ export type rover = {
   y: number;
 };
 
-export const roverEmitter = new EventEmitter();
-
-roverEmitter.on("move", ({ newDirection, seconds }) =>
-  move(newDirection, seconds).then(() => {
-    console.log("resolved");
-  })
-);
-
 /**
  * Get tokens from input
  */
@@ -38,6 +30,13 @@ const cli = () => {
     x: 0,
     y: 0,
   };
+  const roverEmitter = new EventEmitter();
+  roverEmitter.on("move", ({ newDirection, seconds }) =>
+    move(newDirection, seconds).then(() => {
+      console.log("resolved");
+    })
+  );
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -49,11 +48,11 @@ const cli = () => {
   rl.on("line", async (txt: string) => {
     const input = getInput(txt, rover);
     if ((input.command = "move"))
-      newPosition(input.direction as cardinalPoint, input.steps, rover);
-    else{
-      console.log('command is not valid')
+      newPosition(input.direction as cardinalPoint, input.steps, rover, roverEmitter);
+    else {
+      console.log("command is not valid");
     }
-      console.log(rover);
+    console.log(rover);
     rl.prompt();
   });
 };

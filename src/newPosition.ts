@@ -1,4 +1,5 @@
-import { cardinalPoint, rover, roverEmitter } from ".";
+import EventEmitter from "events";
+import { cardinalPoint, rover } from ".";
 import { cardinalPointToCoordinates } from "./cardinalPointToCoordinates";
 
 /**
@@ -8,7 +9,7 @@ export const newPosition = (
   direction: cardinalPoint,
   steps: number,
   rover: rover,
-  emitter = roverEmitter
+  emitter: EventEmitter
 ) => {
   const newDirection = cardinalPointToCoordinates(direction, steps);
   rover.x += newDirection.x;
