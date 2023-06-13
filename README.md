@@ -20,6 +20,10 @@ example: move('N',4)
 1. All commands take 100ms x number of steps
 2. Must use Node.js EventEmitter to signal new position
 
+## Installation
+```
+npm install
+```
 ## test
 ```
 npm test
