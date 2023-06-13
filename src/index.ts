@@ -11,7 +11,9 @@ type rover = {
 
 const roverEmitter = new EventEmitter();
 
-roverEmitter.on("move", ({ direction, steps, rover }) => move(direction, steps, rover));
+roverEmitter.on("move", ({ direction, steps, rover }) =>
+  setTimeout(() => move(direction, steps, rover), steps * 1000)
+);
 
 /**
  * set the move instruction
