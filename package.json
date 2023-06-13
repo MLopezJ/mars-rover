@@ -1,0 +1,32 @@
+{
+  "name": "mars-rover",
+  "version": "1.0.0",
+  "description": "A kata about Event Emitter in Node.js",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MLopezJ/mars-rover.git"
+  },
+  "keywords": [
+    "kata",
+    "node.js",
+    "EventEmitter"
+  ],
+  "author": "Mauro Lopez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MLopezJ/mars-rover/issues"
+  },
+  "homepage": "https://github.com/MLopezJ/mars-rover#readme",
+  "devDependencies": {
+    "@types/node": "20.3.1",
+    "@types/jest": "29.5.1",
+    "jest": "29.5.0",
+    "ts-jest": "29.1.0",
+    "typescript": "5.0.2",
+    "tsx": "3.12.2"
+  }
+}
