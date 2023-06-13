@@ -1,6 +1,7 @@
 import * as readline from "readline";
 import EventEmitter from "events";
 import { move } from "./move";
+import { stepsToCardinalPoints } from "./stepsToCardinalPoints";
 
 export type cardinalPoint = "N" | "S" | "E" | "W";
 export type rover = {
@@ -11,18 +12,17 @@ export type rover = {
 
 const roverEmitter = new EventEmitter();
 
-roverEmitter.on("move", ({ direction, steps, rover }) =>
-  move(direction, steps, rover)
-);
+roverEmitter.on("move", ({ newDirection, rover }) => move(newDirection, rover));
 
 /**
  * Send command to rover
  * Because of the distance, message delays the number of steps in seconds
  */
-const sendCommand = (direction: cardinalPoint, steps: number, rover: rover) => {
+const sendMoveCommand = (direction: cardinalPoint, steps: number, rover: rover) => {
   return new Promise((resolve, reject) => {
+    const newDirection = stepsToCardinalPoints(direction, steps);
     setTimeout(
-      () => resolve(roverEmitter.emit("move", { direction, steps, rover })),
+      () => resolve(roverEmitter.emit("move", { newDirection, rover })),
       steps * 1000
     );
   });
@@ -37,7 +37,7 @@ const userInput = async (txt: string, rover: rover) => {
   if (command === "move") {
     const direction = input[1] ?? "";
     const steps = input[2] ? Number(input[2]) : 0;
-    const confirmation = await sendCommand(
+    const confirmation = await sendMoveCommand(
       direction as cardinalPoint,
       steps,
       rover
@@ -64,7 +64,7 @@ const cli = () => {
   rl.prompt();
 
   rl.on("line", async (input: string) => {
-    await userInput(input, rover)
+    await userInput(input, rover);
     rl.prompt();
   });
 };

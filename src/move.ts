@@ -1,21 +1,21 @@
-import type { cardinalPoint, rover } from ".";
-import { stepsToCardinalPoints } from "./stepsToCardinalPoints";
+import type { rover } from ".";
 
 /**
  * set the move instruction
  */
 export const move = (
-    direction: cardinalPoint,
-    steps: number,
+  newDirection: {
+      x: number, 
+      y: number
+    },
     rover: rover
   ): {
     x: number;
     y: number;
   } => {
-    const newOrderedPair = stepsToCardinalPoints(direction, steps);
     const temp = structuredClone(rover);
-    temp.x += newOrderedPair.x;
-    temp.y += newOrderedPair.y;
+    temp.x += newDirection.x;
+    temp.y += newDirection.y;
     console.log(`\nprevius position`, rover);
     console.log(`actual position`, temp);
     return temp;
