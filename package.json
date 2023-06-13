@@ -2,7 +2,7 @@
   "name": "mars-rover",
   "version": "1.0.0",
   "description": "A kata about Event Emitter in Node.js",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },

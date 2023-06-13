@@ -1,4 +1,4 @@
-import { stepsToCardinalPoints } from ".";
+import { stepsToCardinalPoints } from "./stepsToCardinalPoints";
 import type {cardinalPoint} from ".";
 
 describe("StepsToCardinalPoints", () => {
