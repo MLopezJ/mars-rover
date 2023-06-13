@@ -30,7 +30,7 @@ const move = (
   const temp = structuredClone(rover);
   temp.x += newOrderedPair.x;
   temp.y += newOrderedPair.y;
-  console.log(`previus position`, rover);
+  console.log(`\nprevius position`, rover);
   console.log(`actual position`, temp);
   return temp;
 };
@@ -59,6 +59,7 @@ const cli = () => {
       const direction = temp[1] ?? "";
       const steps = temp[2] ? Number(temp[2]) : 0;
       const x = roverEmitter.emit("move", { direction, steps, rover });
+      console.log(`Command sent. Expected lack of message: ${steps} s.`)
       console.log(x);
     }
 
