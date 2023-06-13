@@ -1,9 +1,9 @@
 import * as readline from "readline";
 import EventEmitter from "events";
-import { stepsToCardinalPoints } from "./stepsToCardinalPoints";
+import { move } from "./move";
 
 export type cardinalPoint = "N" | "S" | "E" | "W";
-type rover = {
+export type rover = {
   direction: cardinalPoint;
   x: number;
   y: number;
@@ -12,27 +12,20 @@ type rover = {
 const roverEmitter = new EventEmitter();
 
 roverEmitter.on("move", ({ direction, steps, rover }) =>
-  setTimeout(() => move(direction, steps, rover), steps * 1000)
+  move(direction, steps, rover)
 );
 
 /**
- * set the move instruction
+ * Send command to rover
+ * Because of the distance, message delays the number of steps in seconds
  */
-const move = (
-  direction: cardinalPoint,
-  steps: number,
-  rover: rover
-): {
-  x: number;
-  y: number;
-} => {
-  const newOrderedPair = stepsToCardinalPoints(direction, steps);
-  const temp = structuredClone(rover);
-  temp.x += newOrderedPair.x;
-  temp.y += newOrderedPair.y;
-  console.log(`\nprevius position`, rover);
-  console.log(`actual position`, temp);
-  return temp;
+const sendCommand = (direction: cardinalPoint, steps: number, rover: rover) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(
+      () => resolve(roverEmitter.emit("move", { direction, steps, rover })),
+      steps * 1000
+    );
+  });
 };
 
 /**
@@ -52,15 +45,18 @@ const cli = () => {
   rl.setPrompt("Mars-rover> ");
   rl.prompt();
 
-  rl.on("line", (input: string) => {
+  rl.on("line", async (input: string) => {
     const temp = input.split(" ");
     const command = temp[0] ?? "";
     if (command === "move") {
       const direction = temp[1] ?? "";
       const steps = temp[2] ? Number(temp[2]) : 0;
-      const x = roverEmitter.emit("move", { direction, steps, rover });
-      console.log(`Command sent. Expected lack of message: ${steps} s.`)
-      console.log(x);
+      const confirmation = await sendCommand(
+        direction as cardinalPoint,
+        steps,
+        rover
+      );
+      if (confirmation) console.log("message received");
     }
 
     rl.prompt();
