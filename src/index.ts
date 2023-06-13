@@ -31,16 +31,14 @@ const newPosition = (direction: cardinalPoint, steps: number, rover: rover) => {
 };
 
 /**
- * Get command from user input
+ * Get tokens from input
  */
-const userInput = (txt: string, rover: rover) => {
+const getInput = (txt: string, rover: rover) => {
   const input = txt.split(" ");
   const command = input[0] ?? "";
-  if (command === "move") {
-    const direction = input[1] ?? "";
-    const steps = input[2] ? Number(input[2]) : 0;
-    newPosition(direction as cardinalPoint, steps, rover);
-  }
+  const direction = input[1] ?? "";
+  const steps = input[2] ? Number(input[2]) : 0;
+  return { command, direction, steps };
 };
 
 /**
@@ -60,9 +58,14 @@ const cli = () => {
   rl.setPrompt("Mars-rover> ");
   rl.prompt();
 
-  rl.on("line", async (input: string) => {
-    userInput(input, rover);
-    console.log(rover);
+  rl.on("line", async (txt: string) => {
+    const input = getInput(txt, rover);
+    if ((input.command = "move"))
+      newPosition(input.direction as cardinalPoint, input.steps, rover);
+    else{
+      console.log('command is not valid')
+    }
+      console.log(rover);
     rl.prompt();
   });
 };
