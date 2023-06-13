@@ -21,13 +21,13 @@ roverEmitter.on("move", ({ newDirection, seconds }) =>
 /**
  * Set new position to the rover
  */
-const newPosition = (direction: cardinalPoint, steps: number, rover: rover) => {
+const newPosition = (direction: cardinalPoint, steps: number, rover: rover, emitter = roverEmitter) => {
   const newDirection = cardinalPointToCoordinates(direction, steps);
   rover.x += newDirection.x;
   rover.y += newDirection.y;
 
   const seconds = steps;
-  roverEmitter.emit("move", { newDirection, seconds });
+  emitter.emit("move", { newDirection, seconds });
 };
 
 /**
