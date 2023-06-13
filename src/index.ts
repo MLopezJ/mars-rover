@@ -12,39 +12,34 @@ export type rover = {
 
 const roverEmitter = new EventEmitter();
 
-roverEmitter.on("move", ({ newDirection, rover }) => move(newDirection, rover));
+roverEmitter.on("move", ({ newDirection, seconds }) =>
+  move(newDirection, seconds).then(() => {
+    console.log("resolved");
+  })
+);
 
 /**
- * Send command to rover.
- * Because of the distance, message delays the number of steps in seconds
+ * Set new position of the rover
  */
-const sendMoveCommand = (direction: cardinalPoint, steps: number, rover: rover) => {
-
+const newPosition = (direction: cardinalPoint, steps: number, rover: rover) => {
   const newDirection = cardinalPointToCoordinates(direction, steps);
-  return new Promise((resolve, reject) => {
-    
-    setTimeout(
-      () => resolve(roverEmitter.emit("move", { newDirection, rover })),
-      steps * 1000
-    );
-  });
+  rover.x += newDirection.x;
+  rover.y += newDirection.y;
+
+  const seconds = steps;
+  roverEmitter.emit("move", { newDirection, seconds });
 };
 
 /**
  * Get command from user input
  */
-const userInput = async (txt: string, rover: rover) => {
+const userInput = (txt: string, rover: rover) => {
   const input = txt.split(" ");
   const command = input[0] ?? "";
   if (command === "move") {
     const direction = input[1] ?? "";
     const steps = input[2] ? Number(input[2]) : 0;
-    const confirmation = await sendMoveCommand(
-      direction as cardinalPoint,
-      steps,
-      rover
-    );
-    if (confirmation) console.log("message received");
+    newPosition(direction as cardinalPoint, steps, rover);
   }
 };
 
@@ -66,8 +61,8 @@ const cli = () => {
   rl.prompt();
 
   rl.on("line", async (input: string) => {
-    await userInput(input, rover);
-    console.log(rover)
+    userInput(input, rover);
+    console.log(rover);
     rl.prompt();
   });
 };
