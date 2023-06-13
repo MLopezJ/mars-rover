@@ -2,7 +2,7 @@
 > A kata about Event Emitter in Node.js 
 
 ## About
-A mar rover need instruction from control tower to operate. Because of the distance between them, commands are received asynchrony. 
+A Mars rover need instruction from control tower to operate. Because of the distance between them, commands are received asynchrony. 
 
 ## Main task
 Implemet a move command
