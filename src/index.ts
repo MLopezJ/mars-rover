@@ -1,7 +1,7 @@
 import * as readline from "readline";
 import EventEmitter from "events";
 import { move } from "./move";
-import { cardinalPointToCoordinates } from "./cardinalPointToCoordinates";
+import { newPosition } from "./newPosition";
 
 export type cardinalPoint = "N" | "S" | "E" | "W";
 export type rover = {
@@ -10,25 +10,13 @@ export type rover = {
   y: number;
 };
 
-const roverEmitter = new EventEmitter();
+export const roverEmitter = new EventEmitter();
 
 roverEmitter.on("move", ({ newDirection, seconds }) =>
   move(newDirection, seconds).then(() => {
     console.log("resolved");
   })
 );
-
-/**
- * Set new position to the rover
- */
-const newPosition = (direction: cardinalPoint, steps: number, rover: rover, emitter = roverEmitter) => {
-  const newDirection = cardinalPointToCoordinates(direction, steps);
-  rover.x += newDirection.x;
-  rover.y += newDirection.y;
-
-  const seconds = steps;
-  emitter.emit("move", { newDirection, seconds });
-};
 
 /**
  * Get tokens from input
