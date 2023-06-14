@@ -1,3 +1,6 @@
+import EventEmitter from "events";
+import { moveMethod } from "./move";
+
 // API
 export type Direction = "N" | "S" | "E" | "W";
 export type success = { success: true };
@@ -11,7 +14,20 @@ type MarsRover = (args: { x: number; y: number; direction: Direction }) => {
 };
 // API
 
+// Implementation
+const marsRover = (args: { x: number; y: number; direction: Direction }) => {
+  const roverEmitter = new EventEmitter();
 
+  const move = (direction: Direction, steps: number) =>
+    moveMethod(direction, steps, args.x, args.y, roverEmitter);
+
+  const on = (
+    command: string,
+    listener: (newPosition: { x: number; y: number }) => void
+  ) => {};
+
+  return { move, on };
+};
 
 // expected execution
 
