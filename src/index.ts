@@ -41,7 +41,7 @@ const marsRover = (args: { x: number; y: number; direction: Direction }) => {
     }
   };
 
-  return { move, on };
+  return { move, ...roverEmitter };
 };
 
 // expected execution
