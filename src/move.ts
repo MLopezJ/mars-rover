@@ -29,9 +29,9 @@ export const moveMethod = (
     position.x += newDirection.x;
     position.y += newDirection.y;
   
-    //emitter.emit("setNewPosition", { position, steps });
-    emitter.emit('moved', steps, position.x, position.y)
-  
+    console.log('moveMethod')
+    //emitter.emit('moved', steps, position.x, position.y)
+    emitter.emit('x', steps, position.x, position.y)
+    
     return { success: true } as success;
   };
-  
