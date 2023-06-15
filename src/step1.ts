@@ -11,7 +11,7 @@
 
 export type Direction = "N" | "S" | "E" | "W";
 
-export type MarsRover = (args: {
+export type MarsRoverType = (args: {
   x: number;
   y: number;
   direction: Direction;
@@ -30,7 +30,7 @@ export type MarsRover = (args: {
 
 // ^^^^^^^^^^ with the last types, part of the API is described.
 
-const rover: ReturnType<MarsRover> = MarsRover({ x: 0, y: 0, direction: "N" });
+const rover: ReturnType<MarsRoverType> = MarsRover({ x: 0, y: 0, direction: "N" });
 
 rover.move('S', 2)
 

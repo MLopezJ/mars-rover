@@ -1,4 +1,4 @@
-import type {Direction} from "./index";
+import { type Direction } from "./step1";
 
 /**
  * Convert a cardinal point to coordinates.
