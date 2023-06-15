@@ -1,5 +1,5 @@
 /**
- * Step 1: API description
+ * Step 1: API contract
  * 
  * As first step, the API is discribed using typescript types. 
  * I'm setting the expected structs taking in consideration the requirements.
