@@ -1,6 +1,6 @@
 import EventEmitter from "events";
 import { cardinalPointToCoordinates } from "./cardinalPointToCoordinates";
-import { type Direction } from "./step1";
+import { type Direction } from "../step1";
 
 export class MarsRover extends EventEmitter {
   private x = 0;

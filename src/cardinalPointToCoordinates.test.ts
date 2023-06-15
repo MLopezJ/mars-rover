@@ -1,5 +1,5 @@
 import { cardinalPointToCoordinates } from "./cardinalPointToCoordinates";
-import { type Direction } from "./step1";
+import { type Direction } from "../step1";
 
 describe("cardinalPointToCoordinates", () => {
   it.each([
