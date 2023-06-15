@@ -6,7 +6,7 @@ It is a practical example about how to build software from the requirements star
 
 In the thecnical part, main concepts of JavaScript as Events ,async code and callbacks are shown.
 
-It is a good example about who to test callbacks from an event.
+It is a good example about how to test callbacks from an event.
 
 ## Instructions
 A Mars rover need instruction from control tower to operate. Because of the distance between them, commands are received asynchrony. 
