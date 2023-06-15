@@ -6,7 +6,7 @@
  * This phase MUST not start if all requirements are not described in the API description (last step).
  */
 
-import { MarsRover } from "./marsRover";
+import { MarsRover } from "./src/marsRover";
 
 const rover = new MarsRover({ x: 0, y: 0, dir: "N" });
 console.log(rover.move("S", 8));
