@@ -1,7 +1,11 @@
-import type {cardinalPoint} from ".";
+import type {Direction} from "./index";
 
+/**
+ * Convert a cardinal point to coordinates.
+ * The system of convertion is ... // TODO: add system of convertion name
+ */
 export const cardinalPointToCoordinates = (
-    cardinalPoint: cardinalPoint,
+    cardinalPoint: Direction,
     steps: number
   ): {
     x: number;
@@ -14,11 +18,11 @@ export const cardinalPointToCoordinates = (
   
     switch (cardinalPoint) {
       case "N": {
-        orderedPair.y += steps;
+        orderedPair.y -= steps;
         return orderedPair;
       }
       case "S": {
-        orderedPair.y -= steps;
+        orderedPair.y += steps;
         return orderedPair;
       }
       case "E": {
