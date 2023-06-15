@@ -2,7 +2,7 @@
 > A kata about Events in Node.js
 
 ## About
-It is a practical example about how to build software from the requirements starting with building an API contract.
+It is a practical example about how to build software from the requirements starting with building an API contract first.
 
 In the thecnical part, main concepts of JavaScript as Events ,async code and callbacks are shown.
 
